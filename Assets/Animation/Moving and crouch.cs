@@ -12,8 +12,7 @@ public class Movingandcrouch : MonoBehaviour
     Rigidbody2D player_rb;
     BoxCollider2D player_col;
     [SerializeField] private Animator animator;
-    private bool isGround;
-    private bool isCrouch;
+
 
     void Start()
     {
@@ -32,15 +31,11 @@ public class Movingandcrouch : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        animator.SetBool("IsGround", IsGrounded());
-        if (IsGrounded()==true)
+        if(IsGrounded() == true)
         {
-            player_rb.linearDamping = 100;
+            animator.SetBool("IsGround", true);
         }
-        else
-        {
-            player_rb.linearDamping = 0;
-        }
+        
     }
     private void LeftRight()
     {
@@ -67,6 +62,7 @@ public class Movingandcrouch : MonoBehaviour
     private void Jump()
     {
         float jumpForce = 200f;
+        
         if(Keyboard.current.spaceKey.IsPressed() && IsGrounded() == true)
         {
             player_rb.AddForce(player_rb.transform.up*jumpForce);
